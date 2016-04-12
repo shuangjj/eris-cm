@@ -1,4 +1,4 @@
-FROM quay.io/eris/base
+FROM chainlex/eris-base
 MAINTAINER Eris Industries <support@erisindustries.com>
 
 #-----------------------------------------------------------------------------
