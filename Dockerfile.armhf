@@ -1,13 +1,5 @@
-FROM quay.io/eris/base:arm
+FROM quay.io/eris/build:arm
 MAINTAINER Eris Industries <support@erisindustries.com>
-
-#-----------------------------------------------------------------------------
-# dependencies
-
-RUN apt-get update && \
-  apt-get install -y --no-install-recommends \
-    libgmp3-dev jq && \
-  rm -rf /var/lib/apt/lists/*
 
 #-----------------------------------------------------------------------------
 # install eris-cm
@@ -15,7 +7,7 @@ RUN apt-get update && \
 ENV REPO $GOPATH/src/github.com/eris-ltd/eris-cm
 COPY . $REPO
 WORKDIR $REPO/cmd/eris-cm
-RUN go build -o /usr/local/bin/eris-cm
+RUN go build --tags netgo -o /usr/local/bin/eris-cm
 RUN chown --recursive $USER:$USER $REPO
 
 # ----------------------------------------------------------------------------
